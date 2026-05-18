@@ -1,7 +1,8 @@
 import React, { useState, useMemo } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { 
    Search, Play, Clock, 
-   Sparkles, X, ChevronRight, Bookmark
+   Sparkles, X, ChevronRight, Bookmark, ArrowLeft
 } from 'lucide-react'
 import { useStore } from '../store/useStore'
 import { TUTORIALS } from '../data/tutorials'
@@ -9,6 +10,7 @@ import type { Tutorial } from '../data/tutorials'
 import { useTranslation } from '../i18n'
 
 export const Tutorials: React.FC = () => {
+  const navigate = useNavigate()
   const { watchHistory, savedTutorials, toggleSaveTutorial, updateTutorialProgress } = useStore()
   const { t } = useTranslation()
   
@@ -95,11 +97,19 @@ export const Tutorials: React.FC = () => {
       
       {/* Header & Search */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-        <div className="space-y-2">
-          <h1 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white">
-            {t('tutorials.title')} <span className="text-primary">{t('tutorials.titleHighlight')}</span>
-          </h1>
-          <p className="text-slate-600 dark:text-gray-400 text-lg">{t('tutorials.subtitle')}</p>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => navigate('/')}
+            className="p-3 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-2xl hover:scale-105 hover:bg-slate-100 dark:hover:bg-white/10 active:scale-95 transition-all text-slate-600 dark:text-white/80 flex items-center justify-center shadow-sm shrink-0"
+          >
+            <ArrowLeft size={16} />
+          </button>
+          <div className="space-y-1">
+            <h1 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white">
+              {t('tutorials.title')} <span className="text-primary">{t('tutorials.titleHighlight')}</span>
+            </h1>
+            <p className="text-slate-600 dark:text-gray-400 text-sm md:text-base">{t('tutorials.subtitle')}</p>
+          </div>
         </div>
 
         <div className="relative group max-w-md w-full">

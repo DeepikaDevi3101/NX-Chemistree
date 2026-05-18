@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { 
   ChevronLeft, MapPin, Lock, Play, 
-  Sparkles, Sword, Shield, BookOpen, Trophy
+  Sparkles, Sword, Shield, BookOpen, Trophy, ArrowLeft
 } from 'lucide-react'
 import { useStore } from '../store/useStore'
 
@@ -18,7 +18,7 @@ const CAMPAIGN_LEVELS = [
     story: "As you enter the dimly lit laboratory, the smell of sulfur hangs heavy in the air. On the bench lies a single crystal, glowing with a faint blue light. 'You're late,' a voice whispers from the shadows...",
     challenge: "Identify the element with Atomic Number 11.",
     answer: "sodium",
-    image: "https://images.unsplash.com/photo-1532187863486-abf51ad95699?auto=format&fit=crop&q=80&w=400"
+    image: "/lost_catalyst.png"
   },
   {
     id: 2,
@@ -84,9 +84,9 @@ export const AdventureMode: React.FC = () => {
         <div className="flex items-center gap-4">
           <button 
             onClick={() => navigate('/games')}
-            className="p-3 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-slate-400 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white transition-all shadow-sm"
+            className="p-3 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-2xl hover:scale-105 hover:bg-slate-100 dark:hover:bg-white/10 active:scale-95 transition-all text-slate-600 dark:text-white/80 flex items-center justify-center shadow-sm shrink-0"
           >
-            <ChevronLeft size={24} />
+            <ArrowLeft size={16} />
           </button>
           <div>
             <h1 className="text-3xl font-black text-slate-900 dark:text-white">Chemistry <span className="text-indigo-600 dark:text-indigo-400">Adventure</span></h1>

@@ -74,11 +74,11 @@ if (-not $isRunning) {
 Write-Host "✅ Ollama server is active and running!" -ForegroundColor Green
 Write-Host ""
 
-# 4. Pull Gemma 4 model (4B parameter lightweight version)
-Write-Host "[4/5] Pulling Gemma 4 (4B) model from library..." -ForegroundColor Yellow
-Write-Host "⏳ This may take a few minutes depending on your internet speed (approx. 2.4 GB)..." -ForegroundColor Cyan
+# 4. Pull Gemma 4 model (e2b version)
+Write-Host "[4/5] Pulling Gemma 4 (e2b) model from library..." -ForegroundColor Yellow
+Write-Host "⏳ This may take a few minutes depending on your internet speed..." -ForegroundColor Cyan
 Write-Host "--------------------------------------------------" -ForegroundColor DarkGray
-& ollama pull gemma4:4b
+& ollama pull gemma4:e2b
 Write-Host "--------------------------------------------------" -ForegroundColor DarkGray
 Write-Host "✅ Gemma 4 model downloaded and loaded successfully!" -ForegroundColor Green
 Write-Host ""
@@ -106,7 +106,7 @@ if (Test-Path $envFilePath) {
         $newContent += "# Local Offline Gemma 4 Setup"
         $newContent += "VITE_USE_LOCAL_OLLAMA=true"
         $newContent += "VITE_OLLAMA_API_URL=http://localhost:11434/api/generate"
-        $newContent += "VITE_OLLAMA_MODEL=gemma4:4b"
+        $newContent += "VITE_OLLAMA_MODEL=gemma4:e2b"
     }
 
     $newContent | Set-Content $envFilePath
@@ -120,7 +120,7 @@ VITE_GEMMA_API_KEY=your_api_key_here
 # Local Offline Gemma 4 Setup
 VITE_USE_LOCAL_OLLAMA=true
 VITE_OLLAMA_API_URL=http://localhost:11434/api/generate
-VITE_OLLAMA_MODEL=gemma4:4b
+VITE_OLLAMA_MODEL=gemma4:e2b
 "@
     $newEnvContent | Set-Content $envFilePath
     Write-Host "✅ Created new .env file with offline Gemma 4 settings." -ForegroundColor Green

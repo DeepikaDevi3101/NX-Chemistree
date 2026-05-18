@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Send, Mic, Sparkles, MoreHorizontal } from 'lucide-react'
+import { Send, Mic, Sparkles, MoreHorizontal, ArrowLeft } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import { useStore } from '../store/useStore'
 import type { ChatMessage } from '../store/useStore'
 import { simulateGemmaStream } from '../lib/mockGemmaApi'
 import { useTranslation } from '../i18n'
 
 export const AITutor: React.FC = () => {
+  const navigate = useNavigate()
   const { chatHistory, addChatMessage, updateChatMessage } = useStore()
   const [inputValue, setInputValue] = useState('')
   const [isTyping, setIsTyping] = useState(false)
@@ -76,6 +78,12 @@ export const AITutor: React.FC = () => {
       {/* Header */}
       <div className="p-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-200 dark:border-white/10 shrink-0 sticky top-0 z-10 flex items-center justify-between shadow-sm">
         <div className="flex items-center gap-3">
+          <button
+            onClick={() => navigate('/')}
+            className="p-2.5 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-xl hover:scale-105 hover:bg-slate-100 dark:hover:bg-white/10 active:scale-95 transition-all text-slate-600 dark:text-white/80 flex items-center justify-center shadow-sm shrink-0"
+          >
+            <ArrowLeft size={16} />
+          </button>
           <div className="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-white">
             <Sparkles size={20} />
           </div>

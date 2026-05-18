@@ -1,15 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Menu, Bell, Sun, Moon, Globe, User, Check } from 'lucide-react'
+import { Menu, Bell, Sun, Moon, Globe, User, Check, ArrowLeft } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useStore } from '../../store/useStore'
 import { LANGUAGE_OPTIONS } from '../../i18n/types'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { Logo } from '../ui/Logo'
 
 export const TopNavigation: React.FC = () => {
+  const navigate = useNavigate()
+  const location = useLocation()
   const { toggleSidebar, theme, setTheme, language, setLanguage, user } = useStore()
   const [isLangOpen, setIsLangOpen] = useState(false)
   const langRef = useRef<HTMLDivElement>(null)
+
+  const showBackButton = location.pathname !== '/'
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -26,6 +30,15 @@ export const TopNavigation: React.FC = () => {
       
       {/* Left Region */}
       <div className="flex items-center gap-3">
+        {showBackButton && (
+          <button
+            onClick={() => navigate(-1)}
+            className="p-2 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-xl hover:scale-105 hover:bg-slate-100 dark:hover:bg-white/10 active:scale-95 transition-all text-slate-600 dark:text-white/80 flex items-center justify-center shadow-sm shrink-0"
+            aria-label="Go Back"
+          >
+            <ArrowLeft size={16} />
+          </button>
+        )}
         <Link to="/" className="flex items-center justify-center select-none active:scale-95 transition-transform">
            <Logo variant="icon" size={36} />
         </Link>

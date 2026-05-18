@@ -226,30 +226,7 @@ export const Dashboard: React.FC = () => {
           </div>
         </section>
 
-        {/* 6. FEATURE GRID */}
-        <section>
-          <div className="flex items-end justify-between mb-4">
-             <h2 className="text-lg font-extrabold text-slate-900 dark:text-white uppercase tracking-wider">{t('dashboard.exploreFeatures')}</h2>
-             <span className="text-xs font-bold text-slate-500 dark:text-gray-400">{FEATURES.length} {t('dashboard.tools')}</span>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
-            {FEATURES.map((feature, idx) => (
-              <Link 
-                key={idx} 
-                to={feature.path} 
-                className="bg-white dark:bg-gray-800/50 p-4 rounded-3xl border border-gray-100 dark:border-white/5 shadow-sm hover:shadow-md transition-all active:scale-95 flex flex-col justify-between aspect-square"
-              >
-                <div className={`w-10 h-10 rounded-full ${feature.color} flex items-center justify-center mb-auto`}>
-                  <feature.icon size={20} />
-                </div>
-                <div>
-                  <h3 className="text-sm font-extrabold text-slate-900 dark:text-gray-100 mb-0.5 leading-tight">{feature.name}</h3>
-                  <p className="text-[10px] text-slate-500 dark:text-gray-400 leading-tight">{feature.desc}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </section>
+
 
         {/* 7. CHEMISTRY MODULES */}
         

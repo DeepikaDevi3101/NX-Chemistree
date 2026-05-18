@@ -4,7 +4,7 @@ import {
   ChevronLeft, BookOpen, Lightbulb, 
   CheckCircle2, HelpCircle, FileText,
   Target, Bookmark, ChevronDown,
-  ChevronUp, Zap, MessageSquare, Star
+  ChevronUp, Zap, MessageSquare, Star, ArrowLeft
 } from 'lucide-react'
 import { useStore } from '../store/useStore'
 import { LESSONS_SYLLABUS } from '../data/lessons'
@@ -57,12 +57,15 @@ export const LessonDetail: React.FC = () => {
       <div className="relative h-64 md:h-80 overflow-hidden">
         <div className={`absolute inset-0 bg-${color}-500/10 blur-3xl`}></div>
         <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-12 space-y-4 max-w-7xl mx-auto">
-          <button 
-            onClick={() => navigate('/lessons')}
-            className="flex items-center gap-2 text-slate-500 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white transition-all w-fit font-medium"
-          >
-            <ChevronLeft size={20} /> Back to Learning Hub
-          </button>
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={() => navigate('/lessons')}
+              className="p-3 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-2xl hover:scale-105 hover:bg-slate-100 dark:hover:bg-white/10 active:scale-95 transition-all text-slate-600 dark:text-white/80 flex items-center justify-center shadow-sm shrink-0"
+            >
+              <ArrowLeft size={16} />
+            </button>
+            <span className="text-xs font-bold text-slate-500 dark:text-gray-400">Back to Learning Hub</span>
+          </div>
           
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div className="space-y-2">

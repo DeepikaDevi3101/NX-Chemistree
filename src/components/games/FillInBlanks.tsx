@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { 
   ChevronLeft, CheckCircle2, XCircle, 
-  ArrowRight, Trophy, RotateCcw 
+  ArrowRight, Trophy, RotateCcw, ArrowLeft 
 } from 'lucide-react'
 import { useStore } from '../../store/useStore'
 
@@ -101,30 +101,35 @@ export const FillInBlanks: React.FC = () => {
       
       {/* Header */}
       <div className="flex items-center justify-between">
-        <button 
-          onClick={() => navigate('/games')}
-          className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
-        >
-          <ChevronLeft size={20} />
-          Back to Games
-        </button>
+        <div className="flex items-center gap-4">
+          <button 
+            onClick={() => navigate('/games')}
+            className="p-3 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-2xl hover:scale-105 hover:bg-slate-100 dark:hover:bg-white/10 active:scale-95 transition-all text-slate-600 dark:text-white/80 flex items-center justify-center shadow-sm shrink-0"
+          >
+            <ArrowLeft size={16} />
+          </button>
+          <div>
+            <h1 className="text-2xl font-black text-slate-900 dark:text-white">Fill in the Blanks</h1>
+            <p className="text-xs text-slate-500 dark:text-gray-400 font-medium">Test your chemical knowledge!</p>
+          </div>
+        </div>
 
         <div className="glass px-6 py-3 rounded-2xl flex items-center gap-4">
           <div className="text-right">
              <span className="block text-[10px] text-gray-500 uppercase font-bold">Progress</span>
-             <p className="text-white font-black">{currentIndex + 1} / {currentQuestions.length}</p>
+             <p className="text-gray-800 dark:text-white font-black">{currentIndex + 1} / {currentQuestions.length}</p>
           </div>
-          <div className="w-px h-8 bg-white/10"></div>
+          <div className="w-px h-8 bg-black/10 dark:bg-white/10"></div>
           <div className="text-right">
              <span className="block text-[10px] text-gray-500 uppercase font-bold">Score</span>
-             <p className="text-white font-black">{score}</p>
+             <p className="text-gray-800 dark:text-white font-black">{score}</p>
           </div>
         </div>
       </div>
 
       {/* Game Area */}
       {!isGameOver ? (
-        <div className="glass p-8 md:p-16 rounded-[40px] border-white/10 space-y-12 min-h-[450px] flex flex-col justify-center relative overflow-hidden">
+        <div className="glass p-8 md:p-16 rounded-[40px] border-black/10 dark:border-white/10 space-y-12 min-h-[450px] flex flex-col justify-center relative overflow-hidden">
           {/* Difficulty Badge */}
           <div className="absolute top-8 left-8">
             <span className="px-4 py-1.5 bg-brand/20 border border-brand/30 rounded-full text-[10px] font-bold text-brand uppercase tracking-widest">
@@ -133,7 +138,7 @@ export const FillInBlanks: React.FC = () => {
           </div>
 
           <div className="space-y-8 text-center">
-            <h2 className="text-2xl md:text-4xl font-medium text-gray-200 leading-relaxed">
+            <h2 className="text-2xl md:text-4xl font-medium text-gray-800 dark:text-gray-200 leading-relaxed">
               {parts[0]}
               <span className="mx-2 inline-block min-w-[120px] border-b-4 border-primary/50 text-primary font-black px-4">
                 {isAnswered ? q.answer : (userInput || '.......')}
@@ -149,8 +154,8 @@ export const FillInBlanks: React.FC = () => {
                 disabled={isAnswered}
                 placeholder="Type your answer..."
                 className={`
-                  w-full bg-white/5 border-2 rounded-2xl p-4 text-center text-xl font-bold text-white outline-none transition-all
-                  ${isAnswered ? (isCorrect ? 'border-green-500/50 bg-green-500/10' : 'border-red-500/50 bg-red-500/10') : 'border-white/10 focus:border-primary/50'}
+                  w-full bg-black/5 dark:bg-white/5 border-2 rounded-2xl p-4 text-center text-xl font-bold text-gray-800 dark:text-white outline-none transition-all
+                  ${isAnswered ? (isCorrect ? 'border-green-500/50 bg-green-500/10' : 'border-red-500/50 bg-red-500/10') : 'border-black/10 dark:border-white/10 focus:border-primary/50'}
                 `}
                 autoFocus
               />
@@ -167,18 +172,18 @@ export const FillInBlanks: React.FC = () => {
 
           {/* Feedback Overlay */}
           {isAnswered && (
-            <div className="animate-in fade-in slide-in-from-top-4 duration-500 glass p-6 rounded-3xl border-white/20 bg-bg-dark/40">
+            <div className="animate-in fade-in slide-in-from-top-4 duration-500 glass p-6 rounded-3xl border-black/20 dark:border-white/20 bg-white/40 dark:bg-bg-dark/40">
               <div className="flex items-start gap-4">
-                <div className={`p-3 rounded-xl ${isCorrect ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
+                <div className={`p-3 rounded-xl ${isCorrect ? 'bg-green-500/20 text-green-550 dark:text-green-400' : 'bg-red-500/20 text-red-550 dark:text-red-400'}`}>
                   {isCorrect ? <CheckCircle2 size={24} /> : <XCircle size={24} />}
                 </div>
                 <div className="flex-1">
-                  <h4 className="text-white font-bold">{isCorrect ? 'Correct!' : 'Incorrect'}</h4>
-                  <p className="text-gray-400 text-sm">{q.explanation}</p>
+                  <h4 className="text-gray-800 dark:text-white font-bold">{isCorrect ? 'Correct!' : 'Incorrect'}</h4>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">{q.explanation}</p>
                 </div>
                 <button 
                   onClick={handleNext}
-                  className="bg-white text-bg-dark font-bold py-3 px-6 rounded-xl flex items-center gap-2 hover:bg-gray-200 transition-colors"
+                  className="bg-gray-900 dark:bg-white text-white dark:text-bg-dark font-bold py-3 px-6 rounded-xl flex items-center gap-2 hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
                 >
                   {currentIndex === currentQuestions.length - 1 ? 'Finish' : 'Next'}
                   <ArrowRight size={18} />
@@ -188,20 +193,20 @@ export const FillInBlanks: React.FC = () => {
           )}
         </div>
       ) : (
-        <div className="glass p-12 rounded-[40px] border-white/10 text-center space-y-8 animate-in zoom-in-95 duration-500">
+        <div className="glass p-12 rounded-[40px] border-black/10 dark:border-white/10 text-center space-y-8 animate-in zoom-in-95 duration-500">
            <div className="w-24 h-24 bg-emerald-500/20 rounded-full flex items-center justify-center text-emerald-500 mx-auto border-4 border-emerald-500/30">
              <Trophy size={48} />
            </div>
            <div>
-             <h2 className="text-4xl font-black text-white">Challenge Complete!</h2>
-             <p className="text-gray-400">Your chemistry knowledge is growing stronger.</p>
+             <h2 className="text-4xl font-black text-gray-800 dark:text-white">Challenge Complete!</h2>
+             <p className="text-gray-600 dark:text-gray-400">Your chemistry knowledge is growing stronger.</p>
            </div>
            <div className="grid grid-cols-2 gap-4 max-w-sm mx-auto">
-             <div className="glass p-6 rounded-2xl border-white/10">
+             <div className="glass p-6 rounded-2xl border-black/10 dark:border-white/10">
                <span className="block text-[10px] text-gray-500 uppercase font-bold">Total Score</span>
-               <p className="text-3xl font-black text-white">{score}</p>
+               <p className="text-3xl font-black text-gray-800 dark:text-white">{score}</p>
              </div>
-             <div className="glass p-6 rounded-2xl border-white/10">
+             <div className="glass p-6 rounded-2xl border-black/10 dark:border-white/10">
                <span className="block text-[10px] text-gray-500 uppercase font-bold">New Rank</span>
                <p className="text-3xl font-black text-emerald-400">{totalXP > 1000 ? 'Expert' : 'Acolyte'}</p>
              </div>
@@ -209,7 +214,7 @@ export const FillInBlanks: React.FC = () => {
            <div className="flex flex-col sm:flex-row gap-4 pt-4 max-w-md mx-auto">
               <button 
                 onClick={() => navigate('/games')}
-                className="flex-1 py-4 glass border-white/10 rounded-2xl text-white font-bold"
+                className="flex-1 py-4 glass border-black/10 dark:border-white/10 rounded-2xl text-gray-800 dark:text-white font-bold"
               >
                 Back to Games
               </button>

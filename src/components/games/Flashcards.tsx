@@ -1,11 +1,12 @@
 import React, { useState, useMemo, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion'
 import { 
   ChevronLeft, ChevronRight, RotateCcw, 
   CheckCircle2, AlertCircle, Search,
   Star, Shuffle, Trophy,
   Flame, ShieldCheck, FlaskConical, Atom, Leaf,
-  Beaker, Sparkles
+  Beaker, Sparkles, ArrowLeft
 } from 'lucide-react'
 import { useStore } from '../../store/useStore'
 import { FLASHCARDS_DATA } from '../../data/flashcards'
@@ -42,6 +43,7 @@ const BACKGROUND_PARTICLES = [...Array(12)].map((_, i) => ({
 }))
 
 export const Flashcards: React.FC = () => {
+  const navigate = useNavigate()
   const { 
     flashcardBookmarks, toggleFlashcardBookmark, 
     flashcardKnown, toggleFlashcardKnown,
@@ -150,14 +152,22 @@ export const Flashcards: React.FC = () => {
 
       {/* 1. AI Header & Dashboard Stats */}
       <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-        <div className="space-y-2">
-           <div className="flex items-center gap-3">
-              <div className="w-2 h-2 rounded-full bg-primary animate-pulse shadow-[0_0_8px_#00e5ff]"></div>
-              <span className="text-[10px] font-black text-primary uppercase tracking-[0.3em]">AI LEARNING CORE ACTIVE</span>
-           </div>
-           <h1 className="text-4xl md:text-6xl font-black text-white">
-             Chemistry <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Flashcards</span>
-           </h1>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => navigate('/games')}
+            className="p-3 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl hover:scale-105 hover:bg-slate-100 dark:hover:bg-white/10 active:scale-95 transition-all text-slate-600 dark:text-white/80 flex items-center justify-center shadow-sm shrink-0"
+          >
+            <ArrowLeft size={16} />
+          </button>
+          <div className="space-y-2">
+             <div className="flex items-center gap-3">
+                <div className="w-2 h-2 rounded-full bg-primary animate-pulse shadow-[0_0_8px_#00e5ff]"></div>
+                <span className="text-[10px] font-black text-primary uppercase tracking-[0.3em]">AI LEARNING CORE ACTIVE</span>
+             </div>
+             <h1 className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white leading-none">
+               Chemistry <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Flashcards</span>
+             </h1>
+          </div>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
@@ -176,7 +186,7 @@ export const Flashcards: React.FC = () => {
               placeholder="Search chemical name, formula, or topic..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-black/40 border border-white/10 rounded-2xl py-5 pl-14 pr-6 text-white focus:border-primary/50 outline-none transition-all glass placeholder:text-gray-600 font-bold"
+              className="w-full bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-2xl py-5 pl-14 pr-6 text-slate-900 dark:text-white focus:border-primary/50 outline-none transition-all glass placeholder:text-slate-400 dark:placeholder:text-gray-600 font-bold"
             />
          </div>
          
@@ -205,12 +215,12 @@ export const Flashcards: React.FC = () => {
             />
          </div>
 
-         <div className="bg-black/40 border border-white/10 rounded-2xl p-1 flex glass">
+         <div className="bg-slate-100 dark:bg-black/40 border border-slate-200 dark:border-white/10 rounded-2xl p-1 flex glass">
             {(['All', 'Known', 'Need Practice'] as const).map(s => (
               <button
                 key={s}
                 onClick={() => setStatusFilter(s)}
-                className={`flex-1 py-2 rounded-xl text-[10px] font-black transition-all ${statusFilter === s ? 'bg-primary text-bg-dark' : 'text-gray-500 hover:text-white'}`}
+                className={`flex-1 py-2 rounded-xl text-[10px] font-black transition-all ${statusFilter === s ? 'bg-primary text-bg-dark' : 'text-slate-500 dark:text-gray-500 hover:text-slate-900 dark:hover:text-white'}`}
               >
                 {s}
               </button>
@@ -356,7 +366,7 @@ export const Flashcards: React.FC = () => {
                   <div className="flex justify-between items-end px-2">
                      <div className="space-y-1">
                         <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest">MODULE PROGRESS</p>
-                        <p className="text-2xl font-black text-white">{currentIndex + 1} <span className="text-gray-700 text-lg">/ {displayCards.length}</span></p>
+                        <p className="text-2xl font-black text-slate-900 dark:text-white">{currentIndex + 1} <span className="text-slate-400 dark:text-gray-700 text-lg">/ {displayCards.length}</span></p>
                      </div>
                      <div className="text-right flex flex-col items-end gap-1">
                         <span className="text-[10px] font-black text-primary uppercase tracking-widest">SYNCED TO AI CORE</span>
@@ -372,7 +382,7 @@ export const Flashcards: React.FC = () => {
                         </div>
                      </div>
                   </div>
-                  <div className="h-2 bg-white/5 rounded-full overflow-hidden p-0.5 border border-white/5 relative">
+                  <div className="h-2 bg-slate-100 dark:bg-white/5 rounded-full overflow-hidden p-0.5 border border-slate-200 dark:border-white/5 relative">
                      <motion.div 
                        className="h-full bg-primary rounded-full shadow-[0_0_15px_#00e5ff]" 
                        initial={{ width: 0 }}
@@ -393,13 +403,13 @@ export const Flashcards: React.FC = () => {
             <div className="flex flex-wrap justify-center gap-4">
                <button 
                  onClick={() => setIsShuffle(!isShuffle)}
-                 className={`flex items-center gap-3 px-8 py-4 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] transition-all ${isShuffle ? 'bg-primary text-bg-dark shadow-[0_0_20px_#00e5ff]' : 'glass border-white/10 text-gray-500'}`}
+                 className={`flex items-center gap-3 px-8 py-4 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] transition-all ${isShuffle ? 'bg-primary text-bg-dark shadow-[0_0_20px_#00e5ff]' : 'bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-500 dark:text-gray-500 hover:text-slate-900 dark:hover:text-white'}`}
                >
                   <Shuffle size={16} /> SHUFFLE MODE
                </button>
                <button 
                  onClick={() => {setCurrentIndex(0); setIsShuffle(false); setIsFlipped(false)}}
-                 className="flex items-center gap-3 px-8 py-4 glass border-white/10 text-gray-500 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] hover:text-white transition-all"
+                 className="flex items-center gap-3 px-8 py-4 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-500 dark:text-gray-500 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] hover:text-slate-900 dark:hover:text-white transition-all"
                >
                   <RotateCcw size={16} /> RESET DECK
                </button>
@@ -413,18 +423,18 @@ export const Flashcards: React.FC = () => {
 }
 
 const StatBox: React.FC<{ label: string, value: string, icon: React.ReactNode, color: string }> = ({ label, value, icon, color }) => (
-  <div className="glass px-4 py-3 rounded-2xl border-white/10 flex items-center gap-3 min-w-[100px]">
-     <div className={`p-2 rounded-lg bg-white/5 ${color}`}>{icon}</div>
+  <div className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 px-4 py-3 rounded-2xl flex items-center gap-3 min-w-[100px] shadow-sm">
+     <div className={`p-2 rounded-lg bg-slate-50 dark:bg-white/5 ${color}`}>{icon}</div>
      <div>
-        <p className="text-[8px] font-black text-gray-600 uppercase tracking-widest">{label}</p>
-        <p className="text-lg font-black text-white leading-none">{value}</p>
+        <p className="text-[8px] font-black text-slate-500 dark:text-gray-500 uppercase tracking-widest">{label}</p>
+        <p className="text-lg font-black text-slate-900 dark:text-white leading-none">{value}</p>
      </div>
   </div>
 )
 
 const InfoCard: React.FC<{ label: string, value: string }> = ({ label, value }) => (
-  <div className="glass p-3 rounded-xl border-white/5 bg-white/5 text-left">
+  <div className="glass p-3 rounded-xl border-slate-200 dark:border-white/5 bg-slate-50 dark:bg-white/5 text-left">
      <p className="text-[8px] font-black text-primary uppercase tracking-widest mb-1">{label}</p>
-     <p className="text-[10px] text-white font-bold line-clamp-2">{value}</p>
+     <p className="text-[10px] text-slate-900 dark:text-white font-bold line-clamp-2">{value}</p>
   </div>
 )

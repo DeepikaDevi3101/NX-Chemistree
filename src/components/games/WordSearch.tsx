@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Timer, RotateCcw, ChevronLeft, CheckCircle2, HelpCircle, Trophy } from 'lucide-react'
+import { Timer, RotateCcw, ChevronLeft, CheckCircle2, HelpCircle, Trophy, ArrowLeft } from 'lucide-react'
 import { useStore } from '../../store/useStore'
 
 const WORD_LISTS = {
@@ -121,22 +121,27 @@ export const WordSearch: React.FC = () => {
       
       {/* Game Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <button 
-          onClick={() => navigate('/games')}
-          className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
-        >
-          <ChevronLeft size={20} />
-          Back to Games
-        </button>
+        <div className="flex items-center gap-4">
+          <button 
+            onClick={() => navigate('/games')}
+            className="p-3 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-2xl hover:scale-105 hover:bg-slate-100 dark:hover:bg-white/10 active:scale-95 transition-all text-slate-600 dark:text-white/80 flex items-center justify-center shadow-sm shrink-0"
+          >
+            <ArrowLeft size={16} />
+          </button>
+          <div>
+            <h1 className="text-2xl font-black text-slate-900 dark:text-white">Word Search</h1>
+            <p className="text-xs text-slate-500 dark:text-gray-400 font-medium">Find all the chemistry keywords!</p>
+          </div>
+        </div>
 
         <div className="flex items-center gap-4">
            <div className="glass px-4 py-2 rounded-xl flex items-center gap-3">
              <Timer size={18} className={timeLeft < 30 ? 'text-red-500 animate-pulse' : 'text-primary'} />
-             <span className="text-white font-black">{Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}</span>
+             <span className="text-gray-800 dark:text-white font-black">{Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}</span>
            </div>
            <div className="glass px-4 py-2 rounded-xl">
              <span className="text-gray-500 text-[10px] font-bold uppercase block">Score</span>
-             <span className="text-white font-black">{score}</span>
+             <span className="text-gray-800 dark:text-white font-black">{score}</span>
            </div>
         </div>
       </div>
@@ -145,12 +150,12 @@ export const WordSearch: React.FC = () => {
         
         {/* Words to Find */}
         <div className="lg:col-span-1 space-y-4">
-          <h2 className="text-xl font-bold text-white">Words to Find</h2>
-          <div className="glass p-4 rounded-2xl border-white/10 space-y-2">
+          <h2 className="text-xl font-bold text-gray-800 dark:text-white">Words to Find</h2>
+          <div className="glass p-4 rounded-2xl border-black/10 dark:border-white/10 space-y-2">
             {wordsToFind.map((word) => (
               <div 
                 key={word} 
-                className={`flex items-center gap-3 p-3 rounded-xl transition-all ${foundWords.includes(word) ? 'bg-green-500/20 text-green-400 line-through opacity-50' : 'bg-white/5 text-gray-300'}`}
+                className={`flex items-center gap-3 p-3 rounded-xl transition-all ${foundWords.includes(word) ? 'bg-green-500/20 text-green-500 dark:text-green-400 line-through opacity-50' : 'bg-black/5 dark:bg-white/5 text-gray-700 dark:text-gray-300'}`}
               >
                 {foundWords.includes(word) ? <CheckCircle2 size={18} /> : <HelpCircle size={18} className="text-gray-600" />}
                 <span className="font-bold tracking-widest">{word}</span>
@@ -165,7 +170,7 @@ export const WordSearch: React.FC = () => {
                 <button
                   key={d}
                   onClick={() => setDifficulty(d)}
-                  className={`flex-1 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest border transition-all ${difficulty === d ? 'bg-primary/20 border-primary text-primary' : 'bg-white/5 border-white/10 text-gray-500'}`}
+                  className={`flex-1 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest border transition-all ${difficulty === d ? 'bg-primary/20 border-primary text-primary' : 'bg-black/5 dark:bg-white/5 border-black/10 dark:border-white/10 text-gray-600 dark:text-gray-500'}`}
                 >
                   {d}
                 </button>
@@ -176,7 +181,7 @@ export const WordSearch: React.FC = () => {
 
         {/* The Grid */}
         <div className="lg:col-span-2">
-          <div className="glass p-4 rounded-3xl border-white/10 aspect-square flex flex-col gap-1">
+          <div className="glass p-4 rounded-3xl border-black/10 dark:border-white/10 aspect-square flex flex-col gap-1">
             {grid.map((row, r) => (
               <div key={r} className="flex gap-1 flex-1">
                 {row.map((cell, c) => {
@@ -188,7 +193,7 @@ export const WordSearch: React.FC = () => {
                       className={`
                         flex-1 flex items-center justify-center font-black text-xs md:text-base rounded
                         transition-all duration-150
-                        ${isSelected ? 'bg-primary text-bg-dark scale-95' : 'bg-white/5 text-white hover:bg-white/10'}
+                        ${isSelected ? 'bg-primary text-bg-dark scale-95' : 'bg-black/5 dark:bg-white/5 text-gray-800 dark:text-white hover:bg-black/10 dark:hover:bg-white/10'}
                       `}
                     >
                       {cell}
@@ -203,7 +208,7 @@ export const WordSearch: React.FC = () => {
              <p className="text-gray-500 text-xs italic">Tip: Click letters in order to select a word.</p>
              <button 
                onClick={() => initGame(difficulty)}
-               className="p-3 bg-white/5 hover:bg-white/10 rounded-xl text-white transition-all"
+               className="p-3 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 rounded-xl text-gray-800 dark:text-white transition-all"
              >
                <RotateCcw size={20} />
              </button>
@@ -215,24 +220,24 @@ export const WordSearch: React.FC = () => {
       {/* Game Over Modal */}
       {isGameOver && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-bg-dark/80 backdrop-blur-md">
-          <div className="glass max-w-sm w-full p-8 rounded-3xl border-white/20 text-center space-y-6">
+          <div className="glass max-w-sm w-full p-8 rounded-3xl border-black/20 dark:border-white/20 text-center space-y-6">
             <div className="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center text-secondary mx-auto">
               <Trophy size={40} />
             </div>
             <div>
-              <h2 className="text-3xl font-black text-white">
+              <h2 className="text-3xl font-black text-gray-800 dark:text-white">
                 {foundWords.length === wordsToFind.length ? 'Well Done!' : 'Time Up!'}
               </h2>
-              <p className="text-gray-400">You found {foundWords.length} out of {wordsToFind.length} words.</p>
+              <p className="text-gray-600 dark:text-gray-400">You found {foundWords.length} out of {wordsToFind.length} words.</p>
             </div>
-            <div className="p-4 bg-white/5 rounded-2xl border border-white/10">
+            <div className="p-4 bg-black/5 dark:bg-white/5 rounded-2xl border border-black/10 dark:border-white/10">
               <span className="text-[10px] text-gray-500 uppercase font-bold">Total Score</span>
-              <p className="text-3xl font-black text-white">{score}</p>
+              <p className="text-3xl font-black text-gray-800 dark:text-white">{score}</p>
             </div>
             <div className="flex gap-4">
               <button 
                 onClick={() => navigate('/games')}
-                className="flex-1 py-4 glass border-white/10 rounded-2xl text-white font-bold"
+                className="flex-1 py-4 glass border-black/10 dark:border-white/10 rounded-2xl text-gray-800 dark:text-white font-bold"
               >
                 Exit
               </button>

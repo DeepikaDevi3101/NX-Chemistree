@@ -5,7 +5,7 @@ const GEMMA_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/g
 
 const USE_LOCAL_OLLAMA = import.meta.env.VITE_USE_LOCAL_OLLAMA === 'true';
 const OLLAMA_API_URL = import.meta.env.VITE_OLLAMA_API_URL || 'http://localhost:11434/api/generate';
-const OLLAMA_MODEL = import.meta.env.VITE_OLLAMA_MODEL || 'gemma4:4b';
+const OLLAMA_MODEL = import.meta.env.VITE_OLLAMA_MODEL || 'gemma4:e2b';
 
 // Helper to search chapter in CHEMISTRY_LESSONS
 const findChapter = (lessonTitle) => {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Search as SearchIcon, X, Beaker } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import { Search as SearchIcon, X, Beaker, ArrowLeft } from 'lucide-react'
 import { ELEMENTS } from '../data/elements'
 import type { ChemistryElement } from '../data/elements'
 import { ElementModal } from '../components/ui/ElementModal'
@@ -47,6 +48,7 @@ const LANTHANIDES = [57,58,59,60,61,62,63,64,65,66,67,68,69,70]
 const ACTINIDES = [89,90,91,92,93,94,95,96,97,98,99,100,101,102]
 
 export const PeriodicTable: React.FC = () => {
+  const navigate = useNavigate()
   const [selectedElement, setSelectedElement] = useState<ChemistryElement | null>(null)
   const [searchQuery, setSearchQuery] = useState('')
   const [suggestions, setSuggestions] = useState<ChemistryElement[]>([])
@@ -119,12 +121,20 @@ export const PeriodicTable: React.FC = () => {
     <div className="min-h-full p-4 md:p-8 flex flex-col items-center max-w-7xl mx-auto">
       {/* Header & Search */}
       <div className="w-full mb-8 space-y-6">
-        <div className="text-center space-y-1">
-          <h1 className="text-3xl md:text-4xl font-black tracking-tight text-slate-900 dark:text-white flex items-center justify-center gap-3">
-            <Beaker className="text-blue-500" size={32} />
-            {t('periodicTablePage.title')}
-          </h1>
-          <p className="text-slate-500 dark:text-gray-400 text-base max-w-2xl mx-auto">{t('periodicTablePage.subtitle')}</p>
+        <div className="relative flex flex-col items-center justify-center">
+          <button
+            onClick={() => navigate('/')}
+            className="absolute left-0 top-1/2 -translate-y-1/2 p-3 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-2xl hover:scale-105 hover:bg-slate-100 dark:hover:bg-white/10 active:scale-95 transition-all text-slate-600 dark:text-white/80 flex items-center justify-center shadow-sm shrink-0"
+          >
+            <ArrowLeft size={16} />
+          </button>
+          <div className="text-center space-y-1">
+            <h1 className="text-3xl md:text-4xl font-black tracking-tight text-slate-900 dark:text-white flex items-center justify-center gap-3">
+              <Beaker className="text-blue-500" size={32} />
+              {t('periodicTablePage.title')}
+            </h1>
+            <p className="text-slate-500 dark:text-gray-400 text-sm md:text-base max-w-2xl mx-auto">{t('periodicTablePage.subtitle')}</p>
+          </div>
         </div>
 
         {/* Search Bar */}

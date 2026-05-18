@@ -1,14 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
   User, Mail, Phone, Clock, 
   AlertCircle, CheckCircle2, ChevronDown,
-  MessageSquare, Share2, Camera, Users, MessageCircle, Play
+  MessageSquare, Share2, Camera, Users, MessageCircle, Play, ArrowLeft
 } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
 import { useContactForm } from '../hooks/useContactForm';
 import { useStore } from '../store/useStore';
 
 const ContactPage: React.FC = () => {
+  const navigate = useNavigate();
   const theme = useStore((state) => state.theme);
   
   const handleShare = async () => {
@@ -95,6 +97,16 @@ const ContactPage: React.FC = () => {
         @keyframes scale { 0%, 100% { transform: none; } 50% { transform: scale3d(1.1, 1.1, 1); } }
         @keyframes fill { 100% { box-shadow: inset 0px 0px 0px 50px #10b981; } }
       `}</style>
+
+      {/* Back Button */}
+      <div className="absolute top-6 left-6 z-20">
+        <button
+          onClick={() => navigate('/')}
+          className="p-3 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-2xl hover:scale-105 hover:bg-slate-100 dark:hover:bg-white/10 active:scale-95 transition-all text-slate-600 dark:text-white/80 flex items-center justify-center shadow-sm shrink-0"
+        >
+          <ArrowLeft size={16} />
+        </button>
+      </div>
 
       {/* Floating Background Symbols */}
       <div className="absolute inset-0 pointer-events-none">

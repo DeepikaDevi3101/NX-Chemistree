@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { 
   CheckCircle2, XCircle, Brain, 
-  ArrowRight, Award, BarChart, RotateCcw, Home
+  ArrowRight, Award, BarChart, RotateCcw, Home, ArrowLeft
 } from 'lucide-react'
 import { useStore } from '../store/useStore'
 import type { QuizAttempt } from '../store/useStore'
@@ -152,8 +152,8 @@ export const QuizActive: React.FC = () => {
 
           <div className="space-y-4 text-left">
              <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-               <BarChart size={20} className="text-brand" />
-               Topic Performance
+                <BarChart size={20} className="text-brand" />
+                Topic Performance
              </h3>
              <div className="space-y-3">
                {Object.entries(topicStats).map(([topic, count]) => (
@@ -198,9 +198,17 @@ export const QuizActive: React.FC = () => {
       
       {/* Quiz Header */}
       <div className="flex items-center justify-between">
-        <div className="space-y-1">
-          <span className="text-[10px] font-black text-brand uppercase tracking-tighter">Mode: {mode}</span>
-          <h2 className="text-slate-900 dark:text-white font-bold text-xl">Question {currentIndex + 1} <span className="text-slate-500 dark:text-gray-500">/ {currentQuestions.length}</span></h2>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => navigate('/quiz')}
+            className="p-3 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-2xl hover:scale-105 hover:bg-slate-100 dark:hover:bg-white/10 active:scale-95 transition-all text-slate-600 dark:text-white/80 flex items-center justify-center shadow-sm shrink-0"
+          >
+            <ArrowLeft size={16} />
+          </button>
+          <div className="space-y-1">
+            <span className="text-[10px] font-black text-brand uppercase tracking-tighter">Mode: {mode}</span>
+            <h2 className="text-slate-900 dark:text-white font-bold text-xl">Question {currentIndex + 1} <span className="text-slate-500 dark:text-gray-500">/ {currentQuestions.length}</span></h2>
+          </div>
         </div>
         <div className="flex items-center gap-4">
            <div className="text-right">

@@ -8,7 +8,7 @@ import {
   BookOpen, Lightbulb, CheckCircle, Zap, FlaskConical,
   MessageCircle, Search, X, Menu, ChevronLeft,
   ChevronRight, ArrowUp, Trash2, Clock, BarChart2,
-  Send, Loader2, RefreshCcw, Sparkles
+  Send, Loader2, RefreshCcw, Sparkles, ArrowLeft
 } from 'lucide-react'
 
 const LessonsPage = () => {
@@ -153,9 +153,15 @@ const LessonsPage = () => {
       {/* TOP NAV */}
       <nav className="h-16 border-b border-slate-200 dark:border-white/10 px-4 flex items-center justify-between sticky top-0 z-50 bg-white/80 dark:bg-[#0a0f1e]/80 backdrop-blur-md">
         <div className="flex items-center gap-4">
+          <button
+            onClick={() => navigate('/')}
+            className="p-2 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-xl hover:scale-105 hover:bg-slate-100 dark:hover:bg-white/10 active:scale-95 transition-all text-slate-600 dark:text-white/80 flex items-center justify-center shadow-sm shrink-0"
+          >
+            <ArrowLeft size={16} />
+          </button>
           <button 
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="p-2 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg text-slate-600 dark:text-white transition-colors"
+            className="p-2 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg text-slate-600 dark:text-white transition-colors shrink-0"
           >
             <Menu size={24} />
           </button>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { FlaskConical, Play, AlertTriangle, ShieldAlert, Sparkles, BookOpen } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import { FlaskConical, Play, AlertTriangle, ShieldAlert, Sparkles, BookOpen, ArrowLeft } from 'lucide-react'
 import { simulateReaction } from '../lib/mockReactionApi'
 import type { ReactionResult } from '../lib/mockReactionApi'
 import { CHEMICAL_CATALOG } from '../data/reactions'
@@ -9,6 +10,7 @@ import { CustomSelect } from '../components/ui/CustomSelect'
 import { useTranslation } from '../i18n'
 
 export const VirtualLab: React.FC = () => {
+  const navigate = useNavigate()
   const { addExperiment } = useStore()
   const { t } = useTranslation()
   const [chem1, setChem1] = useState('')
@@ -58,12 +60,20 @@ export const VirtualLab: React.FC = () => {
   return (
     <div className="p-4 md:p-8 max-w-6xl mx-auto space-y-8 pb-32">
       
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
-          <FlaskConical className="text-brand" size={32} />
-          {t('virtualLab.title')} <span className="text-primary">{t('virtualLab.titleHighlight')}</span>
-        </h1>
-        <p className="text-slate-500 dark:text-gray-400">{t('virtualLab.subtitle')}</p>
+      <div className="flex items-center gap-4 mb-8">
+        <button
+          onClick={() => navigate('/')}
+          className="p-3 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-2xl hover:scale-105 hover:bg-slate-100 dark:hover:bg-white/10 active:scale-95 transition-all text-slate-600 dark:text-white/80 flex items-center justify-center shadow-sm shrink-0"
+        >
+          <ArrowLeft size={16} />
+        </button>
+        <div className="space-y-1">
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <FlaskConical className="text-brand" size={32} />
+            {t('virtualLab.title')} <span className="text-primary">{t('virtualLab.titleHighlight')}</span>
+          </h1>
+          <p className="text-slate-500 dark:text-gray-400 text-sm md:text-base">{t('virtualLab.subtitle')}</p>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
