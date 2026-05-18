@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { 
-  ChevronLeft, MapPin, Lock, Play, 
+  MapPin, Lock, Play, 
   Sparkles, Sword, Shield, BookOpen, Trophy, ArrowLeft
 } from 'lucide-react'
 import { useStore } from '../store/useStore'

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { 
-  ChevronLeft, CheckCircle2, XCircle, 
+  CheckCircle2, XCircle, 
   ArrowRight, Trophy, RotateCcw, ArrowLeft 
 } from 'lucide-react'
 import { useStore } from '../../store/useStore'

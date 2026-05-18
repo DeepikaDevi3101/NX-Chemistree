@@ -1,26 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Sparkles, ChevronLeft, ChevronRight, 
-  Flame, Target, Layers, Brain, HelpCircle, 
-  Grid, Box, Scale, Zap, FlaskConical, Gamepad2, 
-  Video,
+  Flame, Target, Layers, Brain,
+  Grid, Box, Scale, Zap, FlaskConical,
   Atom, Droplet, TestTube, Activity, Hexagon, Trophy, BookOpen
 } from 'lucide-react'
 import { useTranslation } from '../i18n'
 
 // --- MOCK DATA ---
-const FEATURES = [
-  { name: 'AI Tutor', desc: 'Ask any chemistry question', icon: Brain, color: 'bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400', path: '/ai-tutor' },
-  { name: 'Flashcards', desc: 'Spaced repetition decks', icon: Layers, color: 'bg-orange-100 dark:bg-orange-900/40 text-orange-500 dark:text-orange-400', path: '/games/flashcards' },
-  { name: 'Quiz', desc: 'MCQs by topic & level', icon: HelpCircle, color: 'bg-green-100 dark:bg-green-900/40 text-green-500 dark:text-green-400', path: '/quiz' },
-  { name: 'Periodic Table', desc: 'Interactive elements', icon: Grid, color: 'bg-blue-100 dark:bg-blue-900/40 text-blue-500 dark:text-blue-400', path: '/periodic-table' },
-  { name: '3D Molecule Viewer', desc: 'Rotate, zoom, explore molecules', icon: Hexagon, color: 'bg-pink-100 dark:bg-pink-900/40 text-pink-500 dark:text-pink-400', path: '/molecule-insight' },
-  { name: 'Virtual Lab', desc: 'Run safe experiments', icon: FlaskConical, color: 'bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400', path: '/virtual-lab' },
-  { name: 'Games', desc: 'Learn while you play', icon: Gamepad2, color: 'bg-yellow-100 dark:bg-yellow-900/40 text-yellow-600 dark:text-yellow-400', path: '/games' },
-  { name: 'Tutorials', desc: 'Step-by-step guides', icon: Video, color: 'bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400', path: '/tutorial' },
-]
 
 const ORGANIC_MODULES = [
   { title: 'General Organic Chemistry', lessons: 3, quizzes: 12, icon: FlaskConical, color: 'text-purple-500' },

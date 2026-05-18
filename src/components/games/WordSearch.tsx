@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Timer, RotateCcw, ChevronLeft, CheckCircle2, HelpCircle, Trophy, ArrowLeft } from 'lucide-react'
+import { Timer, RotateCcw, CheckCircle2, HelpCircle, Trophy, ArrowLeft } from 'lucide-react'
 import { useStore } from '../../store/useStore'
 
 const WORD_LISTS = {

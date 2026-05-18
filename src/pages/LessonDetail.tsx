@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { 
-  ChevronLeft, BookOpen, Lightbulb, 
+  BookOpen, Lightbulb, 
   CheckCircle2, HelpCircle, FileText,
   Target, Bookmark, ChevronDown,
   ChevronUp, Zap, MessageSquare, Star, ArrowLeft
