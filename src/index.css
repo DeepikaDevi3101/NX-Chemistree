@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #00E5FF;
+  --color-secondary: #7C4DFF;
+  --color-brand: #1565C0;
+  --color-bg-dark: #0A0E1A;
+  --color-bg-light: #f8fafc;
+  --color-bg-gray: #f1f5f9;
+  --color-success: #00E676;
+  --color-warning: #FFD600;
+  --color-error: #FF1744;
+
+  --color-slate-900: #0f172a;
+  --color-slate-600: #475569;
+
+  --font-sans: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'Consolas', monospace;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  .dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-bg-light dark:bg-bg-dark text-slate-900 dark:text-white font-sans antialiased m-0 transition-colors duration-300;
+  }
+}
+
+@layer utilities {
+  .animate-bubble-1 {
+    animation: bubble 3s ease-in infinite;
+  }
+  .animate-bubble-2 {
+    animation: bubble 2.5s ease-in infinite 0.5s;
+  }
+  .animate-bubble-3 {
+    animation: bubble 4s ease-in infinite 1s;
+  }
+  .animate-shake {
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both infinite;
+  }
+  .glass {
+    @apply backdrop-blur-[12px] bg-white/90 dark:bg-white/5 border border-slate-200 dark:border-white/10 shadow-[0_4px_20px_0_rgba(0,0,0,0.05)] dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
+  }
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@keyframes bubble {
+  0% { transform: translateY(100%) scale(0.5); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-100%) scale(1.2); opacity: 0; }
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+@keyframes pulse-glow {
+  0% { filter: drop-shadow(0 0 2px rgba(0, 229, 255, 0.4)); }
+  50% { filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.8)); }
+  100% { filter: drop-shadow(0 0 2px rgba(0, 229, 255, 0.4)); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+
+/* --- NX Chemistree Lessons Additions --- */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0,212,255,0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(0,212,255,0); }
+}
+
+@keyframes typing {
+  0%, 60%, 100% { opacity: 0.3; transform: scale(0.8); }
+  30% { opacity: 1; transform: scale(1); }
+}
+
+.lesson-card { animation: fadeIn 0.4s ease forwards; }
+.chat-panel { animation: slideUp 0.3s ease forwards; }
+.pulse-btn { animation: pulse 2s infinite; }
+
+.typing-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #00d4ff;
+  margin: 0 2px;
+}
+.typing-dot:nth-child(1) { animation: typing 1s infinite 0s; }
+.typing-dot:nth-child(2) { animation: typing 1s infinite 0.2s; }
+.typing-dot:nth-child(3) { animation: typing 1s infinite 0.4s; }
+
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+  border-radius: 2px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.4);
+}

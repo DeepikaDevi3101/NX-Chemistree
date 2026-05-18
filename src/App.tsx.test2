@@ -1,0 +1,28 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useStore } from './store/useStore'
+import { Dashboard } from './pages/Dashboard'
+import { Sidebar } from './components/layout/Sidebar'
+import { TopNavigation } from './components/layout/TopNavigation'
+import { BottomNavigation } from './components/layout/BottomNavigation'
+import { MoleculeLab } from './pages/MoleculeLab'
+
+function App() {
+  const theme = useStore(state => state.theme)
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  }, [theme])
+
+  return (
+    <div className="h-screen flex items-center justify-center bg-slate-900 text-white font-black">
+       RENDER TEST: App is rendering.
+    </div>
+  )
+}
+
+export default App
